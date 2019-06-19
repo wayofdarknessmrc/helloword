@@ -16,6 +16,14 @@ class RoleMiddleware
      public function handle($request, Closure $next, $role)
        {
            echo 'Vai trò:' . $role;
+           if ($role == 'admin') {
+             return $next($request);
+           }
+           else {
+             echo "Xin lỗi bạn không có quyền truy cập";
+             return response()->view('404');
+           }
+
            return $next($request);
        }
 
