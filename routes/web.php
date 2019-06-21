@@ -33,3 +33,6 @@ Route::get('user-info', 'MainController@getUserInfo');
 //Contact
 Route::get('contact', 'ContactController@showContactForm');
 Route::post('contact', 'ContactController@insertMessage');
+//Register
+Route::post('register', 'UserController@storeUser');
+Route::get('register', 'UserController@showRegisterForm');
