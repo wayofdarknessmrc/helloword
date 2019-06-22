@@ -47,4 +47,6 @@ class UserController extends Controller
                    ->with('message', 'Đăng ký thành công.');
        }
    }
+
+   
 }
