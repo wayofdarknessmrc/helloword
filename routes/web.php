@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/hello-word/{name}/{first_Name}', function($name, $first_Name){
   return view('hello-word', [
@@ -61,3 +61,29 @@ Route::get('product/create', 'ProductController@create');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/', 'PostController@index');
+Route::get('/posts', 'PostController@index')->name('list_posts');
+Route::group(['prefix' => 'posts'], function () {
+    Route::get('/drafts', 'PostController@drafts')
+        ->name('list_drafts')
+        ->middleware('auth');
+    Route::get('/show/{id}', 'PostController@show')
+        ->name('show_post');
+    Route::get('/create', 'PostController@create')
+        ->name('create_post')
+        ->middleware('can:post.create');
+    Route::post('/create', 'PostController@store')
+        ->name('store_post')
+        ->middleware('can:post.create');
+    Route::get('/edit/{post}', 'PostController@edit')
+        ->name('edit_post')
+        ->middleware('can:post.update,post');
+    Route::post('/edit/{post}', 'PostController@update')
+        ->name('update_post')
+        ->middleware('can:post.update,post');
+    Route::get('/publish/{post}', 'PostController@publish')
+        ->name('publish_post')
+        ->middleware('can:post.publish');
+});

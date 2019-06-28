@@ -33,5 +33,6 @@ class PostsSeeder extends Seeder
                 'published' => rand(0,1),
                 'user_id' => $author2->id
             ]);
+        }
     }
 }
